@@ -1,0 +1,23 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "springtut-api",
+      "image": "shreeram800/springtut-api:0.0.1-SNAPSHOT",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 8080
+        }
+      ],
+      "environment": [
+        {
+          "name": "SPRING_DATASOURCE_URL",
+          "value": "jdbc:postgresql://awseb-e-9x3f6bwdad-stack-awsebrdsdatabase-scuyt51nyvtr.cdm4moe22x8r.us-east-1.rds.amazonaws.com:5432/customer"
+        }
+      ]
+    }
+  ]
+}
