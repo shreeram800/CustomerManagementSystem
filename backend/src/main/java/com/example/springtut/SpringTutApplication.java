@@ -20,6 +20,9 @@ public class SpringTutApplication {
     @Bean
     CommandLineRunner runner(CustomerRepo customerRepo){
       return args -> {
+
+
+
           Faker faker=new Faker();
           Customer customer= new Customer(faker.name().fullName(),faker.internet().emailAddress(),faker.number().numberBetween(18, 90));
           List<Customer> customerList= new ArrayList<>();
