@@ -14,12 +14,7 @@ import java.util.List;
 @SpringBootApplication
 public class SpringTutApplication {
     public static void main(String[] args) {
-
-
         SpringApplication.run(SpringTutApplication.class, args);
-
-
-
     }
 
     @Bean
