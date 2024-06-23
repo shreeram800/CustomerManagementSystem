@@ -160,14 +160,8 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <auth>
-                        <username>shreeram800</username>
-                        <password>Sh@100404</password>
-                    </auth>
                     <from>
-                        <image>
-                            amazoncorretto:17
-                        </image>
+                        <image>eclipse-temurin:17</image>
                         <platforms>
                             <platform>
                                 <architecture>arm64</architecture>
@@ -180,8 +174,7 @@
                         </platforms>
                     </from>
                     <to>
-                        <image>
-                            docker.io/${docker.username}/${project.artifactId}:${project.version}</image>
+                        <image>docker.io/${docker.username}/${project.artifactId}:${project.version}</image>
                         <tags>
                             <tag>latest</tag>
                         </tags>
