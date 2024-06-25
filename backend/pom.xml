@@ -14,6 +14,8 @@
     <properties>
         <java.version>17</java.version>
         <docker.username>shreeram800</docker.username>
+        <docker.image.name>springtut-api</docker.image.name>
+        <docker.image.tag></docker.image.tag>
     </properties>
     <dependencies>
         <dependency>
@@ -175,7 +177,7 @@
                         </platforms>
                     </from>
                     <to>
-                        <image>docker.io/${docker.username}/${project.artifactId}:${project.version}</image>
+                        <image>docker.io/${docker.username}/${docker.image.name}:${docker.image.tag}</image>
                         <tags>
                             <tag>latest</tag>
                         </tags>
