@@ -15,7 +15,7 @@
         <java.version>17</java.version>
         <docker.username>shreeram800</docker.username>
         <docker.image.name>springtut-api</docker.image.name>
-        <docker.image.tag></docker.image.tag>
+        <docker.image.tag>latest</docker.image.tag>
     </properties>
     <dependencies>
         <dependency>
@@ -178,9 +178,6 @@
                     </from>
                     <to>
                         <image>docker.io/${docker.username}/${docker.image.name}:${docker.image.tag}</image>
-                        <tags>
-                            <tag>latest</tag>
-                        </tags>
                     </to>
                 </configuration>
             </plugin>
