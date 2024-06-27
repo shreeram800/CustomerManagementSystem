@@ -29,8 +29,8 @@ public class CustomerService {
         Customer customer =new Customer(
                 customerRegistrationRequest.name(),
                 customerRegistrationRequest.email(),
-                customerRegistrationRequest.age()
-        );
+                customerRegistrationRequest.age(),
+                "Male");
         customerDao.insertCustomer(customer);
     }
     public void removeCustomerById(Integer id){

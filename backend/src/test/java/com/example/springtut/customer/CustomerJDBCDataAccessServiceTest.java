@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,7 +22,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerunitTest{
     @Test
     void selectAllCustomers() {
 
-        Customer customer=new Customer(1,faker.name().fullName(),faker.internet().emailAddress()+ "-" + UUID.randomUUID(),45);
+        Customer customer=new Customer(1,faker.name().fullName(),faker.internet().emailAddress()+ "-" + UUID.randomUUID(),45, "Male");
         underTest.insertCustomer(customer);
         List<Customer> customerList=underTest.selectAllCustomers();
         Assertions.assertThat(customerList).isNotEmpty();
@@ -28,7 +30,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerunitTest{
     @Test
     void selectCustomerById() {
         String email=faker.internet().emailAddress()+ "-"+ UUID.randomUUID();
-        Customer customer=new Customer(faker.name().fullName(),email,45);
+        Customer customer=new Customer(faker.name().fullName(),email,45, "Male");
         underTest.insertCustomer(customer);
         int id= underTest.selectAllCustomers().stream().filter(c->c.getEmail().equals(email)).map(Customer::getId).findFirst().orElseThrow();
         Optional<Customer> actual =underTest.selectCustomerById(id);
@@ -37,12 +39,13 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerunitTest{
             assertThat(c.getName()).isEqualTo(customer.getName());
             assertThat(c.getEmail()).isEqualTo(customer.getEmail());
             assertThat(c.getAge()).isEqualTo(customer.getAge());
+            assertThat(c.getGender()).isEqualTo(customer.getGender());
         });
     }
 
     @Test
     void insertCustomer() {
-        Customer customer=new Customer(faker.name().fullName(),faker.internet().emailAddress()+ "-" + UUID.randomUUID(),45);
+        Customer customer=new Customer(faker.name().fullName(),faker.internet().emailAddress()+ "-" + UUID.randomUUID(),45, "Male");
         underTest.insertCustomer(customer);
         List<Customer> actual =underTest.selectAllCustomers();
         assertThat(actual.contains(customer));
@@ -50,7 +53,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerunitTest{
     @Test
     void existPersonWithEmail() {
         String email=faker.internet().emailAddress()+ "-" + UUID.randomUUID();
-        Customer customer=new Customer(faker.name().fullName(),email,45);
+        Customer customer=new Customer(faker.name().fullName(),email,45, "Male");
         underTest.insertCustomer(customer);
         boolean actual = underTest.existPersonWithEmail(email);
         assertThat(actual).isTrue();
@@ -59,7 +62,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerunitTest{
     @Test
     void existPersonWithId() {
         String email = faker.internet().emailAddress() + "-" + UUID.randomUUID();
-        Customer customer = new Customer(faker.name().fullName(), email, 45);
+        Customer customer = new Customer(faker.name().fullName(), email, 45, "Male");
         underTest.insertCustomer(customer);
         List<Customer> list = underTest.selectAllCustomers();
         int id = list.stream()
@@ -73,7 +76,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerunitTest{
     @Test
     void deleteCustomerById() {
         String email = faker.internet().emailAddress() + "-" + UUID.randomUUID();
-        Customer customer = new Customer(faker.name().fullName(), email, 45);
+        Customer customer = new Customer(faker.name().fullName(), email, 45, "Male");
         underTest.insertCustomer(customer);
         List<Customer> list = underTest.selectAllCustomers();
         int id = list.stream()
@@ -88,7 +91,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerunitTest{
     @Test
     void updateNameCustomer() {
         String email = faker.internet().emailAddress() + "-" + UUID.randomUUID();
-        Customer customer = new Customer( faker.name().fullName(), email, 32);
+        Customer customer = new Customer(faker.name().fullName(), email, 32, "Male");
         underTest.insertCustomer(customer);
         List<Customer> list = underTest.selectAllCustomers();
         int id = list.stream()
@@ -97,25 +100,26 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerunitTest{
                 .findFirst()
                 .orElseThrow();
         System.out.println(id);
-        String updatedName=faker.name().fullName();
+        String updatedName = faker.name().fullName();
         Customer updatedCustomer = new Customer();
         updatedCustomer.setId(id);
         updatedCustomer.setName(updatedName);
         updatedCustomer.setEmail(customer.getEmail());
         updatedCustomer.setAge(customer.getAge());
+        updatedCustomer.setGender(customer.getGender());
         underTest.updateCustomer(updatedCustomer);
         Optional<Customer> updatedCustomerFromDb = underTest.selectCustomerById(id);
         assertNotNull(updatedCustomerFromDb.orElse(null), "Updated customer not found in the database");
         assertEquals(updatedName, updatedCustomerFromDb.get().getName(), "Name not updated");
         assertEquals(email, updatedCustomerFromDb.get().getEmail(), "Email not updated");
         assertEquals(id, updatedCustomerFromDb.get().getId(), "ID mismatch after update");
+        assertEquals("Male", updatedCustomerFromDb.get().getGender(), "Gender mismatch after update");
 
     }
-
     @Test
     void updateEmailCustomer(){
         String email = faker.internet().emailAddress() + "-" + UUID.randomUUID();
-        Customer customer = new Customer(faker.name().fullName(),email, 45);
+        Customer customer = new Customer(faker.name().fullName(),email, 45, "Male");
         underTest.insertCustomer(customer);
         List<Customer> list = underTest.selectAllCustomers();
         String finalEmail = email;
@@ -129,11 +133,13 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerunitTest{
         updatedCustomer.setEmail(new_email);
         updatedCustomer.setName(customer.getName());
         updatedCustomer.setAge(customer.getAge());
+        updatedCustomer.setGender(customer.getGender());
         underTest.updateCustomer(updatedCustomer);
         Optional<Customer> updatedCustomerFromDb = underTest.selectCustomerById(id);
         Assertions.assertThat(updatedCustomerFromDb).isPresent().hasValueSatisfying(c->{
             assertThat(c.getId()).isEqualTo(id);
             assertThat(c.getEmail()).isEqualTo(new_email);
+            assertThat(c.getGender()).isEqualTo("Male");
         });
     }
 
@@ -141,7 +147,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerunitTest{
     void updateAgeCustomer() {
         int age = 34;
         String email=faker.internet().emailAddress() + "-" + UUID.randomUUID();
-        Customer customer = new Customer(faker.name().fullName(),email, age);
+        Customer customer = new Customer(faker.name().fullName(),email, age, "Male");
         underTest.insertCustomer(customer);
         List<Customer> list = underTest.selectAllCustomers();
         int id = list.stream()
@@ -154,9 +160,11 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestContainerunitTest{
         updatedCustomer.setAge(age);
         updatedCustomer.setEmail(customer.getEmail());
         updatedCustomer.setName(customer.getName());
+        updatedCustomer.setGender("Male");
         underTest.updateCustomer(updatedCustomer);
         Optional<Customer> updatedCustomerFromDb = underTest.selectCustomerById(id);
         assertNotNull(updatedCustomerFromDb, "Updated customer not found in the database");
         assertEquals(age, updatedCustomerFromDb.get().getAge(), "Age not updated");
+        assertEquals("Male", updatedCustomerFromDb.get().getGender(), "Gender mismatch");
     }
 }

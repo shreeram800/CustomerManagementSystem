@@ -29,7 +29,7 @@ class CustomerServiceTest {
     @Test
     void canGetCustomer() {
         int id=10;
-        Customer customer=new Customer(id,"Shree ram","ram@gmail.com",20 );
+        Customer customer=new Customer(id,"Shree ram","ram@gmail.com",20, "Male");
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
         Customer actual= underTest.getCustomer(id);
         assertThat(actual).isEqualTo(customer);
@@ -83,7 +83,7 @@ class CustomerServiceTest {
     void updateCustomer() {
 
         int id=10;
-        Customer customer=new Customer(id,"Shree ram","ram@gmail.com",20 );
+        Customer customer=new Customer(id,"Shree ram","ram@gmail.com",20, "Male");
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
 
         String new_email="krishna@gamil.com";

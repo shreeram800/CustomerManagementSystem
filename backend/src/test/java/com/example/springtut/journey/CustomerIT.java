@@ -57,8 +57,8 @@ public class CustomerIT {
         Customer expected=new Customer(
                 name,
                 email,
-                age
-        );
+                age,
+                "Male");
         assertThat(customers).usingRecursiveFieldByFieldElementComparatorIgnoringFields("id")
                 .contains(expected);
 
@@ -153,8 +153,8 @@ public class CustomerIT {
         Customer expected=new Customer(
                 name,
                 email,
-                age
-        );
+                age,
+                "Male");
         assertThat(customers).usingRecursiveFieldByFieldElementComparatorIgnoringFields("id")
                 .contains(expected);
         assert customers != null;

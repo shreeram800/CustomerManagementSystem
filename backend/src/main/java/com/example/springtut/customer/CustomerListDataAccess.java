@@ -3,7 +3,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
   @Repository("list")
@@ -13,7 +12,7 @@ public class CustomerListDataAccess implements CustomerDao{
 
     static {
         customers=new ArrayList<>();
-        Customer alex= new Customer(1,"alex","jcnsjcndjkc",21);
+        Customer alex= new Customer(1,"alex","jcnsjcndjkc",21, "Male");
         customers.add(alex);
 
     }

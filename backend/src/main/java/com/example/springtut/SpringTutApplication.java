@@ -15,22 +15,15 @@ import java.util.List;
 public class SpringTutApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringTutApplication.class, args);
-
-
-
     }
-
     @Bean
     CommandLineRunner runner(CustomerRepo customerRepo){
       return args -> {
           Faker faker=new Faker();
-          Customer customer= new Customer(faker.name().fullName(),faker.internet().emailAddress(),faker.number().numberBetween(18, 90));
+          Customer customer= new Customer(faker.name().fullName(),faker.internet().emailAddress(),faker.number().numberBetween(18, 90), "Male");
           List<Customer> customerList= new ArrayList<>();
           customerList.add(customer);
           customerRepo.saveAll(customerList);
-
-
-
       };
     }
 }

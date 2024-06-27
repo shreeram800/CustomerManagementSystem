@@ -20,7 +20,7 @@ class CustomerRowMapperTest {
         when(resultSet.getString("name")).thenReturn("krishna");
         when(resultSet.getString("email")).thenReturn("krishna@gmail.com");
         Customer customer=customerRowMapper.mapRow(resultSet,1);
-        Customer expected =new Customer(1,"krishna","krishna@gmail.com",19);
+        Customer expected =new Customer(1,"krishna","krishna@gmail.com",19, "Male");
         assertThat(customer);
     }
 }
