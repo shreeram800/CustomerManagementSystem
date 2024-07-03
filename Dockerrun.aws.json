@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "springtut-api",
-      "image": "shreeram800/springtut-api:27.06.2024.09.16.21",
+      "image": "shreeram800/springtut-api:03.07.2024.04.50.13",
       "essential": true,
       "memory": 512,
       "portMappings": [
