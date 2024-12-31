@@ -1,0 +1,154 @@
+# 👥 Full-Stack Customer Management System
+
+Welcome to the Full-Stack Customer Management System! This application is a comprehensive solution for managing customer data, providing a robust backend powered by Spring Boot and a responsive frontend built with React. The entire system is deployed on AWS for scalability and reliability.
+
+## ✨ Features
+
+- **👤 Customer Management**
+  - Add, update, view, and delete customer records.
+  - Search and filter customer data.
+
+- **📊 Dashboard**
+  - Overview of customer metrics and activities.
+  - Interactive charts and reports.
+
+- **🔒 Secure Authentication**
+  - User authentication and role-based access control.
+
+- **🌐 API Integration**
+  - RESTful APIs for seamless communication between frontend and backend.
+
+- **☁️ Deployment**
+  - Fully deployed on AWS using EC2 and RDS.
+
+## 🛠️ Tech Stack
+
+| 🖥️ Technology      | 📜 Description                              |
+|-----------------|------------------------------------------|
+| ☕ Java            | Backend programming language            |
+| 🌱 Spring Boot     | Framework for backend development        |
+| 🛠️ Spring Data JPA | ORM for database interaction             |
+| 🐘 PostgreSQL      | Relational database                     |
+| ⚛️ React           | Frontend library for UI development     |
+| ☁️ AWS             | Cloud platform for deployment           |
+| 🐳 Docker          | Containerization of the application     |
+
+## 📋 Prerequisites
+
+- ☕ Java 17 or higher
+- 🛠️ Maven 3.8+
+- 🐘 PostgreSQL 13+
+- ⚛️ Node.js and npm (for React)
+- ☁️ AWS account and CLI setup
+
+## ⚙️ Installation
+
+### Backend Setup:
+
+1. 📥 Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/customer-management.git
+   cd customer-management/backend
+   ```
+
+2. 🛠️ Set up the database:
+   - Create a 🐘 PostgreSQL database and update the `application.properties` file with your database credentials:
+     ```properties
+     spring.datasource.url=jdbc:postgresql://localhost:5432/customer_db
+     spring.datasource.username=your-username
+     spring.datasource.password=your-password
+     ```
+
+3. 🚀 Run database migrations:
+   ```bash
+   mvn flyway:migrate
+   ```
+
+4. 🛠️ Build and run the backend:
+   ```bash
+   mvn spring-boot:run
+   ```
+
+### Frontend Setup:
+
+1. Navigate to the frontend directory:
+   ```bash
+   cd ../frontend
+   ```
+
+2. 📥 Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. 🚀 Start the React development server:
+   ```bash
+   npm start
+   ```
+
+### AWS Deployment:
+
+1. ☁️ Create an EC2 instance and RDS PostgreSQL database.
+2. 🐳 Build Docker images for the frontend and backend.
+3. Deploy the images to AWS using ECS or manually to the EC2 instance.
+4. Update DNS settings to point to your EC2 public IP or load balancer.
+
+## 🧪 Testing
+
+- ▶️ Run unit tests for the backend:
+  ```bash
+  mvn test
+  ```
+
+- ▶️ Run frontend tests:
+  ```bash
+  npm test
+  ```
+
+## 📂 Folder Structure
+
+```
+|-- backend
+    |-- src
+        |-- main
+            |-- java
+                |-- com.example.customermanagement
+                    |-- controllers
+                    |-- models
+                    |-- repositories
+                    |-- services
+            |-- resources
+                |-- application.properties
+    |-- test
+        |-- java
+            |-- com.example.customermanagement
+|-- frontend
+    |-- src
+        |-- components
+        |-- pages
+        |-- services
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. 🍴 Fork the repository.
+2. 🌱 Create a new branch for your feature.
+3. 💾 Commit your changes.
+4. 🔄 Open a pull request.
+
+## 📜 License
+
+This project is licensed under the MIT License. See the [📜 LICENSE](LICENSE) file for details.
+
+## 🙌 Acknowledgements
+
+- 🌱 Spring Boot Community
+- ⚛️ React Developers
+- ☁️ AWS Documentation
+
+---
+
+Thank you for checking out the Full-Stack Customer Management System! If you have any questions or feedback, feel free to raise an issue or contact the project maintainers.
+
